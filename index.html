@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Type Test</title>
+</head>
+
+<body>
+    <div class="title">Type Test</div>
+    <div id="app">
+        <ul class="list-group words" id="words_">
+            <li class="list-group-item" id="currWord" v-for="(word,index) in words" :class="{ 'active': index === count, 'true': index < count}"> {{word}} </li>
+        </ul>
+        <div class="current-word">
+            <div class="time-and-score">
+                <span>Timer: {{ countDown }} |</span>
+                <span>Score: {{score}}</span>                
+            </div>
+
+            <hr style="background: white;">
+
+            <div class="info" v-if="disableButton">
+                <p v-if="isMatching === 'true' ">{{isRight}} 👍</p>
+                <p v-if="isMatching === 'false' ">{{isWrong}} 😢</p>
+            </div>
+
+            <input type="text" :placeholder="!disableButton ? 'Click the start button...' : 'Type here...'" :disabled="!disableButton" v-model="currentWord" @keyup.enter="check()">
+
+            <button class="btn btn-primary" id="startButton" :disabled="disableButton" @click="countDownTimer()">{{ buttonTextSetter }}</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>    
+
+</body>
+
+</html>
